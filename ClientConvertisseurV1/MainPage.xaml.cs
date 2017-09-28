@@ -39,7 +39,18 @@ namespace ClientConvertisseurV1
             this.cbxDevise.DataContext = new List<Devise>(result);
         }
 
-
+        private void ButtonConvertisseur(object sender, RoutedEventArgs e)
+        {
+            string montantStr = MontantBox.Text;
+            Devise devise = (Devise) cbxDevise.SelectedItem;
+            if (( montantStr != "") && (devise != null) )
+            {
+                double result = wsService.CalculConversionDevise(Double.Parse(montantStr), devise);
+                MontantDevBox.Text = result.ToString();
+            }
+          
+           
+        }
 
 
     }
