@@ -13,6 +13,7 @@ using Windows.UI.Popups;
 
 namespace ClientConvertisseurV2.ViewModel
 {
+    // Attention, je n'ai pas encore changé les noms des variables (euro devient devise et devise devient euro), ni fais de la généricité
     public class DeviseEuroViewModel : ViewModelBase
     {
         private ObservableCollection<Devise> _comboBoxDevises;
