@@ -23,10 +23,15 @@ namespace ClientConvertisseurV2.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<DeviseEuroViewModel>();
         }         
         /// <summary>         
         /// Gets the Main property.         
         /// </summary>         
+        /// 
+
+
+        public DeviseEuroViewModel DeviseEuros => ServiceLocator.Current.GetInstance<DeviseEuroViewModel>();
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
     }

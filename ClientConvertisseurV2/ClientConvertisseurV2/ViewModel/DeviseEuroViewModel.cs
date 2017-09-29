@@ -1,29 +1,25 @@
-﻿using ClientConvertisseurV2.Model;
-using ClientConvertisseurV2.Service;
-using ClientConvertisseurV2.View;
-using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.Command;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ClientConvertisseurV2.Model;
+using ClientConvertisseurV2.Service;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace ClientConvertisseurV2.ViewModel
 {
-    public class MainViewModel : ViewModelBase
+    public class DeviseEuroViewModel : ViewModelBase
     {
         private ObservableCollection<Devise> _comboBoxDevises;
 
         public ICommand BtnSetConversion { get; private set; }
-        public ICommand BtnChangePage { get; private set; }
 
-        private Devise _comboBoxDeviseItem; 
+        private Devise _comboBoxDeviseItem;
 
         private double _montantDevise;
 
@@ -74,11 +70,10 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
-        public MainViewModel()
+        public DeviseEuroViewModel()
         {
             ActionGetData();
             BtnSetConversion = new RelayCommand(ActionSetConversion);
-            BtnChangePage = new RelayCommand(ActionChangeConvertisseur);
         }
 
 
@@ -92,11 +87,11 @@ namespace ClientConvertisseurV2.ViewModel
             else if (_comboBoxDeviseItem == null)
             {
                 var messageDialog = new MessageDialog("Il n'y pas la devise de renseigner");
-                await messageDialog.ShowAsync();                
+                await messageDialog.ShowAsync();
             }
             else
-            {
-                this.MontantDevise = Double.Parse(_montantEuros) * ComboBoxDeviseItem.Taux;
+            {             
+                this.MontantDevise = (Double.Parse(_montantEuros) / ComboBoxDeviseItem.Taux);
             }
         }
 
@@ -109,20 +104,14 @@ namespace ClientConvertisseurV2.ViewModel
                 var result = await wsService.GetAllDevisesAsync();
                 ComboBoxDevises = new ObservableCollection<Devise>(result);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var messageDialog = new MessageDialog("Pas de connexion au webService concerné");
                 await messageDialog.ShowAsync();
                 // IL FAUDRAIT FERMER L'APPLICATION
             }
         }
-
-
-        private void ActionChangeConvertisseur() {
-            RootPage r = (RootPage)Window.Current.Content;
-            SplitView sv = (SplitView)(r.Content);
-            (sv.Content as Frame).Navigate(typeof(DeviseEuros));
-        }
+        
 
     }
 

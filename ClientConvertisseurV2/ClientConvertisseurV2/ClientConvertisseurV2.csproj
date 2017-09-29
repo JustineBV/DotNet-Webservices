@@ -98,10 +98,17 @@
     <Compile Include="Model\Devise.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\WSService.cs" />
+    <Compile Include="ViewModel\DeviseEuroViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="View\DeviseEuros.xaml.cs">
+      <DependentUpon>DeviseEuros.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RootPage.xaml.cs">
+      <DependentUpon>RootPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +145,15 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\DeviseEuros.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\RootPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

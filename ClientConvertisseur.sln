@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConvertisseurV1", "ClientConvertisseurV1\ClientConvertisseurV1.csproj", "{152231CB-D698-4A35-9E06-FBD19AB383AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConvertisseurV2", "..\ClientConvertisseurV2\ClientConvertisseurV2\ClientConvertisseurV2.csproj", "{2CF5A281-BED1-435D-B6A1-E74D24434371}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientConvertisseurV2", "ClientConvertisseurV2\ClientConvertisseurV2\ClientConvertisseurV2.csproj", "{2CF5A281-BED1-435D-B6A1-E74D24434371}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
