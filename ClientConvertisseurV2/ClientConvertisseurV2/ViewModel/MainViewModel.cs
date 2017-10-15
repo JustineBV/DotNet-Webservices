@@ -4,11 +4,7 @@ using ClientConvertisseurV2.View;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -30,6 +26,9 @@ namespace ClientConvertisseurV2.ViewModel
         private string _montantEuros;
 
 
+        /// <summary>
+        /// Property ComboBoxDeviseItem avec notification du changement de property
+        /// </summary>
         public Devise ComboBoxDeviseItem
         {
             get { return _comboBoxDeviseItem; }
@@ -41,6 +40,9 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+        /// <summary>
+        /// Property MontantDevise avec notification du changement de property
+        /// </summary>
         public double MontantDevise
         {
             get { return _montantDevise; }
@@ -52,6 +54,9 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+        /// <summary>
+        /// Property MontantEuros avec notification du changement de property
+        /// </summary>
         public string MontantEuros
         {
             get { return _montantEuros; }
@@ -63,6 +68,9 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+        /// <summary>
+        /// Property ComboBoxDevises avec notification de la modification
+        /// </summary>
         public ObservableCollection<Devise> ComboBoxDevises
         {
             get { return _comboBoxDevises; }
@@ -74,6 +82,10 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+        /// <summary>
+        /// Constructeur sans paramètre
+        /// Ajoute les deux RelayCommand aux boutons BtnSetConversion et BtnChangePage
+        /// </summary>
         public MainViewModel()
         {
             ActionGetData();
@@ -82,6 +94,9 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+        /// <summary>
+        /// Méthode aynchrone permettant de renvoyer dans le textBox MontantDevise, la conversion du montant en fonction de la devise donnés par les box
+        /// </summary>
         private async void ActionSetConversion()
         {
             if (_montantEuros == null)
@@ -101,6 +116,11 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+
+        /// <summary>
+        /// Essaie de récupérer les devises dans un appel asynchrone
+        /// Erreur deconnexion gérée par un try catch
+        /// </summary>
         private async void ActionGetData()
         {
             WSService wsService = WSService.GetInstance();
@@ -113,7 +133,7 @@ namespace ClientConvertisseurV2.ViewModel
             {
                 var messageDialog = new MessageDialog("Pas de connexion au webService concerné");
                 await messageDialog.ShowAsync();
-                // IL FAUDRAIT FERMER L'APPLICATION
+                Application.Current.Exit();
             }
         }
 
