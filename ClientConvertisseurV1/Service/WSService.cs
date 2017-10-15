@@ -12,11 +12,15 @@ namespace ClientConvertisseurV1.Service
     public class WSService
     {
         static HttpClient client = new HttpClient();
-        private static WSService _wsService;
+        private static WSService _wsService = null;
 
 
 
-        // Fonction pour garder le pattern du singleton en instanciant qu'une seule fois WSService.
+        /// <summary>
+        /// Fonction permettant de créer un singleton en instanciant qu'une seule fois WSService.
+        /// Fonction static pour pouvoir être appelée partout
+        /// </summary>
+        /// <returns>WSService : la référence si il existait déjà ou une instanciation</returns>
         public static WSService GetInstance()
         {
             if(_wsService == null)
@@ -30,12 +34,20 @@ namespace ClientConvertisseurV1.Service
             return _wsService;
         }
 
+
+        /// <summary>
+        /// Constructeur private pour ne pas pouvoir être utilisé ailleurs que par  la fonction GetInstance() => singleton
+        /// </summary>
         private WSService()
         {
         }
-        
-        
-         public async Task<List<Devise>> GetAllDevisesAsync()
+
+
+        /// <summary>
+        /// Retourne de manière asynchrone toutes les devises de notre client HttpClient()
+        /// </summary>
+        /// <returns>Task<List<Devise>> </returns>
+        public async Task<List<Devise>> GetAllDevisesAsync()
         {
             List<Devise> devises = new List<Devise>();
             HttpResponseMessage response = await client.GetAsync("devise");
@@ -47,6 +59,12 @@ namespace ClientConvertisseurV1.Service
         }
 
 
+        /// <summary>
+        /// Retourne le montant donné en paramètre convertit par le taux de la devise donnée en paramètre
+        /// </summary>
+        /// <param name="montant"></param>
+        /// <param name="devise"></param>
+        /// <returns>montant en double</returns>
         public double CalculConversionDevise(double montant, Devise devise)
         {
             return montant*devise.Taux;

@@ -34,11 +34,21 @@ namespace ClientConvertisseurV1
             ActionGetData();
         }
 
+
+        /// <summary>
+        /// Permet de récupérer toutes les devises par le webservice de manière asynchrone
+        /// </summary>
         private async void ActionGetData() {
             var result = await wsService.GetAllDevisesAsync();
             this.cbxDevise.DataContext = new List<Devise>(result);
         }
 
+
+        /// <summary>
+        /// Fait appel au webservice pour convertir le montant donné dan la textbox par la devise donnée dans la combobox et affiche le résultat dans la dernière textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonConvertisseur(object sender, RoutedEventArgs e)
         {
             string montantStr = MontantBox.Text;
@@ -47,8 +57,7 @@ namespace ClientConvertisseurV1
             {
                 double result = wsService.CalculConversionDevise(Double.Parse(montantStr), devise);
                 MontantDevBox.Text = result.ToString();
-            }
-          
+            }        
            
         }
 
