@@ -14,6 +14,8 @@ namespace ClientConvertisseurV2.ViewModel
 
     public class ViewModelLocator
     {
+
+        // Add each new ModelView
         static ViewModelLocator()
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
@@ -25,8 +27,8 @@ namespace ClientConvertisseurV2.ViewModel
 
         /// <summary>         
         /// Gets the Main property.         
-        /// </summary>         
-        /// 
+        /// </summary>   
+        /// For each new page we need to add this line which made link between the view and the modelview.
         public DeviseEuroViewModel DeviseEuros => ServiceLocator.Current.GetInstance<DeviseEuroViewModel>();
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 

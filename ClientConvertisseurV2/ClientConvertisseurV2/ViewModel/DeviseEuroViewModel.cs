@@ -10,6 +10,9 @@ using GalaSoft.MvvmLight.Command;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Windows.UI.Popups;
+using ClientConvertisseurV2.View;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace ClientConvertisseurV2.ViewModel
 {
@@ -19,14 +22,21 @@ namespace ClientConvertisseurV2.ViewModel
         private ObservableCollection<Devise> _comboBoxDevises;
 
         public ICommand BtnSetConversion { get; private set; }
+   
+        public ICommand BtnChangePage { get; private set; }
 
         private Devise _comboBoxDeviseItem;
 
-        private double _montantDevise;
+        private double _montantEuros;
 
-        private string _montantEuros;
+        private string _montantDevise;
 
 
+        /// <summary>
+        /// Properties of _comboBoxDeviseItem
+        /// Get return the list of Devises
+        /// Set sends a message RaisePropertyChanged();
+        /// </summary>
         public Devise ComboBoxDeviseItem
         {
             get { return _comboBoxDeviseItem; }
@@ -38,7 +48,11 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
-        public double MontantDevise
+        /// <summary>
+        /// Property of _montantDevise
+        /// Return string
+        /// </summary>
+        public string MontantDevise
         {
             get { return _montantDevise; }
             set
@@ -49,7 +63,12 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
-        public string MontantEuros
+
+        /// <summary>
+        /// Property of _montantEuros
+        /// Return double
+        /// </summary>
+        public double MontantEuros
         {
             get { return _montantEuros; }
             set
@@ -60,6 +79,11 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+
+        /// <summary>
+        /// Property of  _comboBoxDevises
+        /// Return ObservableCollection<Devise>
+        /// </summary>
         public ObservableCollection<Devise> ComboBoxDevises
         {
             get { return _comboBoxDevises; }
@@ -71,16 +95,23 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+        /// <summary>
+        /// Constructor, initialise the relayCommand of BtnSetConversion
+        /// </summary>
         public DeviseEuroViewModel()
         {
             ActionGetData();
             BtnSetConversion = new RelayCommand(ActionSetConversion);
+            BtnChangePage = new RelayCommand(ActionChangeConvertisseur);
         }
 
 
+        /// <summary>
+        /// Method asynchronous converts the first amount with the devise and displays in the MontantEuros TextBox
+        /// </summary>
         private async void ActionSetConversion()
         {
-            if (_montantEuros == null)
+            if (_montantDevise == null)
             {
                 var messageDialog = new MessageDialog("Renseignez le montant à convertir");
                 await messageDialog.ShowAsync();
@@ -92,7 +123,7 @@ namespace ClientConvertisseurV2.ViewModel
             }
             else
             {             
-                this.MontantDevise = (Double.Parse(_montantEuros) / ComboBoxDeviseItem.Taux);
+                this.MontantEuros = (Double.Parse(_montantDevise) / ComboBoxDeviseItem.Taux);
             }
         }
 
@@ -112,7 +143,18 @@ namespace ClientConvertisseurV2.ViewModel
                 // IL FAUDRAIT FERMER L'APPLICATION
             }
         }
-        
+
+
+        /// <summary>
+        /// Change of convertissor page : go to MainPage
+        /// </summary>
+        private void ActionChangeConvertisseur()
+        {
+            RootPage r = (RootPage)Window.Current.Content;
+            SplitView sv = (SplitView)(r.Content);
+            (sv.Content as Frame).Navigate(typeof(MainPage));
+        }
+
 
     }
 

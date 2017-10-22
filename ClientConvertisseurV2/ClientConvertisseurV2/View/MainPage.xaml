@@ -11,7 +11,8 @@
     
 
     <RelativePanel Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="50">
-        <TextBlock  Name="Montant" RelativePanel.AlignHorizontalCenterWithPanel="True"  > Montant en euros</TextBlock>
+        <TextBlock Name="Description" Foreground="Red" TextAlignment="Left" Margin="25" >Convertisseur euros => devise</TextBlock>
+        <TextBlock  Name="Montant" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="Description" > Montant en euros</TextBlock>
         <TextBox Name="MontantBox" Text="{Binding MontantEuros, Mode=TwoWay}"  RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="Montant" ></TextBox>
         <TextBlock  Name="Devise" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="MontantBox"> Devise</TextBlock>
         <ComboBox x:Name="cbxDevise" ItemsSource="{Binding ComboBoxDevises}"  SelectedItem="{Binding ComboBoxDeviseItem, Mode=TwoWay}" DisplayMemberPath="NomDevise" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="Devise"></ComboBox>

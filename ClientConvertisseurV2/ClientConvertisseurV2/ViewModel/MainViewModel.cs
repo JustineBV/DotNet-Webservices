@@ -138,6 +138,9 @@ namespace ClientConvertisseurV2.ViewModel
         }
 
 
+        /// <summary>
+        /// Change to convertissor page = go to DeviseEuros
+        /// </summary>
         private void ActionChangeConvertisseur() {
             RootPage r = (RootPage)Window.Current.Content;
             SplitView sv = (SplitView)(r.Content);
